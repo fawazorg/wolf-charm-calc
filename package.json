@@ -1,0 +1,17 @@
+{
+  "name": "wolf-charm-calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cmd.wolf.js": "github:fawazorg/cmd.wolf.js",
+    "dotenv": "^10.0.0",
+    "wolf.js": "github:fawazorg/wolf.js"
+  }
+}
