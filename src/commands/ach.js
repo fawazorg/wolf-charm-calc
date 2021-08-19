@@ -99,16 +99,32 @@ const achivments = [
 أصدقاء للأبد : 25`,
   },
 ];
-
+/**
+ *
+ * @param {String} text
+ */
+const FormatArabic = (text) => {
+  return text
+    .replaceAll("أ", "ا")
+    .replaceAll("ة", "ه")
+    .replaceAll("إ", "ا")
+    .replaceAll("ؤ", "و");
+};
 /**
  * @param {Client} bot
  * @param {CommandContext} context
  */
 const Ach = async (bot, context) => {
+  if (context.Rest.length <= 0) {
+    await context.Reply(
+      `/me • الأوسمة المتاحة :\n ${achivments.map((e) => e.name).join("\n")}`
+    );
+    return;
+  }
   for (const [index, achivment] of achivments.entries()) {
-    if (achivment.name === context.Rest) {
+    if (FormatArabic(achivment.name) === FormatArabic(context.Rest)) {
       await context.Reply(
-        `/me - وسام ${achivment.name}\n${achivment.description}\n${achivment.info}`
+        `/me • ${achivment.description} : \n${achivment.info}`
       );
       return;
       break;

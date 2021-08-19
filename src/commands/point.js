@@ -31,7 +31,7 @@ const Point = async (bot, context) => {
     await context.Reply("(n) يجب أن يكون عدد النقاط من مضاعفات 25.");
     return;
   }
-  let post_fix = "العدد :";
+  let post_fix = "الكمية :";
   let pre_fix = "تشارم";
   await context.Reply(`/me ${post_fix} ${Math.floor(num / 25)} ${pre_fix}`);
 };

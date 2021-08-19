@@ -17,42 +17,42 @@ const Translation = [
  */
 const charms = [
   {
-    name: "بالونات فضية",
+    name: "بالون فضي",
     cost: 400,
     level: 25,
   },
   {
-    name: "بالونات ذهبية",
+    name: "بالون ذهبي",
     cost: 1000,
     level: 50,
   },
   {
-    name: "الوردة السوداء",
+    name: "وردة سوداء",
     cost: 400,
     level: 15,
   },
   {
-    name: "الوردة الزرقاء",
+    name: "وردة زرقاء",
     cost: 600,
     level: 25,
   },
   {
-    name: "الوردة الذهبية",
+    name: "وردة ذهبية",
     cost: 1000,
     level: 50,
   },
   {
-    name: "القلب المتوج",
+    name: "قلب متوج",
     cost: 1000,
     level: 25,
   },
   {
-    name: "القلب الذهبي",
+    name: "قلب ذهبي",
     cost: 2500,
     level: 50,
   },
   {
-    name: "خاتم فضة",
+    name: "خاتم فضي",
     cost: 600,
     level: 15,
   },
@@ -67,7 +67,7 @@ const charms = [
     level: 15,
   },
   {
-    name: "قلادة ذهبية",
+    name: "قلادة ذهب",
     cost: 2500,
     level: 20,
   },
@@ -87,22 +87,22 @@ const charms = [
     level: 35,
   },
   {
-    name: "قلادة ألماسية",
+    name: "قلادة ألماس",
     cost: 10000,
     level: 50,
   },
   {
-    name: "حجر التورمالين",
+    name: "تورمالين",
     cost: 1000,
     level: 15,
   },
   {
-    name: "حجر الزبرجد",
+    name: "زبرجد",
     cost: 1500,
     level: 15,
   },
   {
-    name: "حجر الزمرد",
+    name: "زمرد",
     cost: 2500,
     level: 20,
   },
@@ -124,12 +124,23 @@ const charms = [
 ];
 
 /**
+ *
+ * @param {String} text
+ */
+const FormatArabic = (text) => {
+  return text
+    .replaceAll("أ", "ا")
+    .replaceAll("ة", "ه")
+    .replaceAll("إ", "ا")
+    .replaceAll("ؤ", "و");
+};
+/**
  * @param {Client} bot
  * @param {CommandContext} context
  */
 const Price = async (bot, context) => {
   for (const [index, charm] of charms.entries()) {
-    if (charm.name === context.Rest) {
+    if (FormatArabic(charm.name) === FormatArabic(context.Rest)) {
       await context.Reply(
         `/me ${charm.name} \nالسعر: ${charm.cost} نقطة\nالمستوى : +${charm.level}`
       );
