@@ -17,11 +17,6 @@ const Translation = [
  */
 const charms = [
   {
-    name: "صندوق الهدايا",
-    cost: 200,
-    level: 15,
-  },
-  {
     name: "بالونات فضية",
     cost: 400,
     level: 25,

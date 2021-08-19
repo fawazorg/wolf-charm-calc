@@ -5,9 +5,9 @@ const Translation = [
     key: "CHARM",
     translations: {
       //"en-US": "!tv find",
-      "ar-SA": "!تشارمز عدد",
-      "ar-SA-1": "!تشارم عدد",
-      "ar-SA-2": "!تشارم ع",
+      "ar-SA": "!تشارمز تكلفة",
+      "ar-SA-1": "!تشارم تكلفة",
+      "ar-SA-2": "!تشارم ت",
     },
   },
 ];
