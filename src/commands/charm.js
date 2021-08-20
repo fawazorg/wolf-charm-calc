@@ -27,7 +27,7 @@ const Charm = async (bot, context) => {
     await context.Reply("(n) لا يمكن حساب ارقام اقل من 0.");
     return;
   }
-  let post_fix = "التكلفة :";
+  let post_fix = "القيمة :";
   let pre_fix = "نقطة";
   await context.Reply(`/me ${post_fix} ${num * 25} ${pre_fix}`);
 };
