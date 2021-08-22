@@ -5,13 +5,15 @@ const Translation = [
     key: "CHARM",
     translations: {
       //"en-US": "!tv find",
-      "ar-SA": "!تشارمز تكلفة",
-      "ar-SA-1": "!تشارم تكلفة",
-      "ar-SA-2": "!تشارم ت",
+      "ar-SA": "!تشارمز قيمة",
+      "ar-SA-1": "!تشارم قيمة",
+      "ar-SA-2": "!تشارم ق",
     },
   },
 ];
 const a2e = (s) => s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+const formatNumber = (num) =>
+  num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
 /**
  * @param {Client} bot
@@ -29,7 +31,7 @@ const Charm = async (bot, context) => {
   }
   let post_fix = "القيمة :";
   let pre_fix = "نقطة";
-  await context.Reply(`/me ${post_fix} ${num * 25} ${pre_fix}`);
+  await context.Reply(`/me ${post_fix} ${formatNumber(num * 25)} ${pre_fix}`);
 };
 
 /**

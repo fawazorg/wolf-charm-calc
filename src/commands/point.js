@@ -12,7 +12,8 @@ const Translation = [
   },
 ];
 const a2e = (s) => s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
-
+const formatNumber = (num) =>
+  num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 /**
  * @param {Client} bot
  * @param {CommandContext} context
@@ -33,7 +34,9 @@ const Point = async (bot, context) => {
   }
   let post_fix = "الكمية :";
   let pre_fix = "تشارم";
-  await context.Reply(`/me ${post_fix} ${Math.floor(num / 25)} ${pre_fix}`);
+  await context.Reply(
+    `/me ${post_fix} ${formatNumber(Math.floor(num / 25))} ${pre_fix}`
+  );
 };
 
 /**
