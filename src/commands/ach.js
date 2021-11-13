@@ -4,7 +4,6 @@ const Translation = [
   {
     key: "ACH",
     translations: {
-      //"en-US": "!tv find",
       "ar-SA": "!تشارمز وسام",
       "ar-SA-1": "!تشارم وسام",
       "ar-SA-2": "!تشارم و",

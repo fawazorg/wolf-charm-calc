@@ -4,7 +4,6 @@ const Translation = [
   {
     key: "POINT",
     translations: {
-      //"en-US": "!tv find",
       "ar-SA": "!تشارمز نقطة",
       "ar-SA-1": "!تشارم نقطة",
       "ar-SA-2": "!تشارم ن",

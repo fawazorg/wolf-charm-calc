@@ -4,7 +4,6 @@ const Translation = [
   {
     key: "DEFAULT",
     translations: {
-      //"en-US": "!tv find",
       "ar-SA": "!تشارمز",
       "ar-SA-1": "!تشارم",
     },

@@ -1,25 +1,31 @@
+const Ach = require("./ach");
+const Ads = require("./Ads");
 const Charm = require("./charm");
-const Point = require("./point");
 const Defulte = require("./default");
 const Help = require("./help");
+const Point = require("./point");
 const Price = require("./price");
-const Ach = require("./ach");
+const Summary = require("./summary");
 
 const Commands = [
   ...Ach.Commands,
+  ...Ads.Commands,
   ...Charm.Commands,
-  ...Point.Commands,
   ...Defulte.Commands,
   ...Help.Commands,
+  ...Point.Commands,
   ...Price.Commands,
+  ...Summary.Commands,
 ];
 const Translation = [
   ...Ach.Translation,
+  ...Ads.Translation,
   ...Charm.Translation,
-  ...Point.Translation,
   ...Defulte.Translation,
   ...Help.Translation,
+  ...Point.Translation,
   ...Price.Translation,
+  ...Summary.Translation,
 ];
 
 module.exports = {
