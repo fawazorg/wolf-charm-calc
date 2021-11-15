@@ -5,6 +5,7 @@ const Defulte = require("./default");
 const Help = require("./help");
 const Point = require("./point");
 const Price = require("./price");
+const Prices = require("./prices");
 const Summary = require("./summary");
 
 const Commands = [
@@ -15,6 +16,7 @@ const Commands = [
   ...Help.Commands,
   ...Point.Commands,
   ...Price.Commands,
+  ...Prices.Commands,
   ...Summary.Commands,
 ];
 const Translation = [
@@ -25,6 +27,7 @@ const Translation = [
   ...Help.Translation,
   ...Point.Translation,
   ...Price.Translation,
+  ...Prices.Translation,
   ...Summary.Translation,
 ];
 
