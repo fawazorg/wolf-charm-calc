@@ -1,5 +1,5 @@
-const { Client } = require("wolf.js");
-const { CommandSystem } = require("cmd.wolf.js");
+const { Client } = require("@wolf.jet/core");
+const { CommandSystem } = require("@wolf.jet/framework");
 const { Commands, Translation } = require("./commands");
 require("dotenv").config();
 

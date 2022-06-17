@@ -1,4 +1,4 @@
-const { Command, CommandContext } = require("cmd.wolf.js");
+const { Command, CommandContext } = require("@wolf.jet/framework");
 
 const Translation = [
   {
@@ -14,7 +14,7 @@ const Translation = [
 /**
  * charm list
  */
-const achivments = [
+const achievements = [
   {
     name: "الورود",
     description: "قم بافتتاح محل للورود",
@@ -126,11 +126,11 @@ const FormatArabic = (text) => {
 const Ach = async (bot, context) => {
   if (context.Rest.length <= 0) {
     await context.Reply(
-      `/me • الأوسمة المتاحة :\n ${achivments.map((e) => e.name).join("\n")}`
+      `/me • الأوسمة المتاحة :\n ${achievements.map((e) => e.name).join("\n")}`
     );
     return;
   }
-  for (const [index, achivment] of achivments.entries()) {
+  for (const [index, achivment] of achievements.entries()) {
     if (FormatArabic(achivment.name) === FormatArabic(context.Rest)) {
       await context.Reply(
         `/me • ${achivment.description} : \n${achivment.info}`

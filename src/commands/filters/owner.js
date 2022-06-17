@@ -1,4 +1,4 @@
-const { IFilter } = require("cmd.wolf.js");
+const { IFilter } = require("@wolf.jet/framework");
 
 module.exports = class Owner extends IFilter {
   #Maker = [7766, 12500068];

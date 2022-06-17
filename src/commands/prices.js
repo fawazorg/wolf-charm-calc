@@ -1,4 +1,4 @@
-const { Command, CommandContext } = require("cmd.wolf.js");
+const { Command, CommandContext } = require("@wolf.jet/framework");
 const path = require("path");
 const Translation = [
   {
@@ -11,7 +11,7 @@ const Translation = [
 ];
 
 const Prices = async (bot, context) => {
-  await context.ReplyImage(path.resolve("src/data/charm-price.jpeg"));
+  await context.ReplyImage(path.resolve("src/data/charms.jpeg"));
 };
 
 /**

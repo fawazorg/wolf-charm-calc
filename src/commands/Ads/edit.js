@@ -1,4 +1,4 @@
-const { Command, CommandContext } = require("cmd.wolf.js");
+const { Command, CommandContext } = require("@wolf.jet/framework");
 const { Owner, PrivateFilter } = require("../filters");
 
 const ads = require("../../data/ads");

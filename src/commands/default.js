@@ -1,4 +1,4 @@
-const { Command, CommandContext } = require("cmd.wolf.js");
+const { Command, CommandContext } = require("@wolf.jet/framework");
 
 const Translation = [
   {
@@ -15,7 +15,7 @@ const a2e = (s) => s.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d
  * @param {Client} bot
  * @param {CommandContext} context
  */
-const Defulte = async (bot, context) => {
+const Default = async (bot, context) => {
   await context.Reply(`- مرحبًا بك في بوت حساب التشارمز
 
 البوت متخصص في حساب كمية و قيمة التشارمز، لعرض قائمة المساعدة أكتب 
@@ -27,7 +27,7 @@ const Defulte = async (bot, context) => {
  */
 const Commands = [
   new Command("DEFAULT", {
-    method: (null, Defulte),
+    method: (null, Default),
   }),
 ];
 

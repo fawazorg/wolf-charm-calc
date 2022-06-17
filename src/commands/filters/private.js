@@ -1,4 +1,4 @@
-const { IFilter } = require("cmd.wolf.js");
+const { IFilter } = require("@wolf.jet/framework");
 
 module.exports = class PrivateFilter extends IFilter {
   constructor() {

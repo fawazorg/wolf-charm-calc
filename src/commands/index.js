@@ -1,7 +1,7 @@
 const Ach = require("./ach");
 const Ads = require("./Ads");
 const Charm = require("./charm");
-const Defulte = require("./default");
+const Default = require("./default");
 const Help = require("./help");
 const Point = require("./point");
 const Price = require("./price");
@@ -12,7 +12,7 @@ const Commands = [
   ...Ach.Commands,
   ...Ads.Commands,
   ...Charm.Commands,
-  ...Defulte.Commands,
+  ...Default.Commands,
   ...Help.Commands,
   ...Point.Commands,
   ...Price.Commands,
@@ -23,7 +23,7 @@ const Translation = [
   ...Ach.Translation,
   ...Ads.Translation,
   ...Charm.Translation,
-  ...Defulte.Translation,
+  ...Default.Translation,
   ...Help.Translation,
   ...Point.Translation,
   ...Price.Translation,
