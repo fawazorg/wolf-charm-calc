@@ -7,6 +7,7 @@ const Point = require("./point");
 const Price = require("./price");
 const Prices = require("./prices");
 const Summary = require("./summary");
+const Levels = require("./levels");
 
 const Commands = [
   ...Ach.Commands,
@@ -18,6 +19,7 @@ const Commands = [
   ...Price.Commands,
   ...Prices.Commands,
   ...Summary.Commands,
+  ...Levels.Commands,
 ];
 const Translation = [
   ...Ach.Translation,
@@ -29,6 +31,7 @@ const Translation = [
   ...Price.Translation,
   ...Prices.Translation,
   ...Summary.Translation,
+  ...Levels.Translation,
 ];
 
 module.exports = {
