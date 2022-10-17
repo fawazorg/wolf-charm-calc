@@ -1,0 +1,92 @@
+[
+  {
+    "name": "command_default",
+    "value": "!charms"
+  },
+  {
+    "name": "command_default",
+    "value": "!charm"
+  },
+  {
+    "name": "command_help",
+    "value": "help"
+  },
+  {
+    "name": "command_price",
+    "value": "cost"
+  },
+  {
+    "name": "command_price",
+    "value": "c"
+  },
+  {
+    "name": "command_point",
+    "value": "point"
+  },
+  {
+    "name": "command_summary",
+    "value": "summary"
+  },
+  {
+    "name": "command_levels",
+    "value": "levels"
+  },
+  {
+    "name": "command_prices",
+    "value": "prices"
+  },
+  {
+    "name": "command_offer",
+    "value": "offer"
+  },
+  {
+    "name": "command_offer",
+    "value": "o"
+  },
+  {
+    "name": "message_default",
+    "value": "- Welcome to Charms bot\r\n\r\nBot helps you to dealing with charms, Calculate how much it will cost you, Find out about the latest charms offers available."
+  },
+  {
+    "name": "message_help",
+    "value": [
+      "- Welcome to Charms bot\r\n",
+      "!charms cost <number> - Show the cost of purchasing charms in Wolf points",
+      "!charms point <pints> - Show the amount of Charms you can buy",
+      "!charms summary - Show the group's charms stats for the past 24 hours",
+      "!charms prices - Send a picture containing all the prices of the charms",
+      "!charms levels - Send a picture containing charms by levels",
+      "!charms offer - Show latest charms offers",
+      "!charms offer <ID> - Show the details of offer by ID",
+      "!charms help - view help menu"
+    ]
+  },
+  {
+    "name": "message_error_not_number",
+    "value": "(n) The entry must be a number."
+  },
+  {
+    "name": "message_error_offer_notfound",
+    "value": "(n) There is no offer with this ID."
+  },
+  {
+    "name": "message_error_number_must_be_multiples_25",
+    "value": "(n) The number must be a multiple of 25."
+  },
+  {
+    "name": "message_error_summary_not_found",
+    "value": "- no one :("
+  },
+  {
+    "name": "message_summary",
+    "value": "Group stats for 24 hours:\r\n\r\n• Most Generous:\r\n{topSend}\r\n\r\n• Most Praised:\r\n{topReceived}\r\n\r\nTotal: {total} points"
+  },
+  {
+    "name": "message_point",
+    "value": "/me Quantity: {charms} Charms"
+  },
+  {
+    "name": "message_charms",
+    "value": "/me Cost: {points} points"
+  }
+]

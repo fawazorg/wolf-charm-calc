@@ -1,0 +1,104 @@
+[
+  {
+    "name": "command_default",
+    "value": "!تشارمز"
+  },
+  {
+    "name": "command_default",
+    "value": "!تشارم"
+  },
+  {
+    "name": "command_help",
+    "value": "مساعدة"
+  },
+  {
+    "name": "command_help",
+    "value": "مساعده"
+  },
+  {
+    "name": "command_price",
+    "value": "قيمة"
+  },
+  {
+    "name": "command_price",
+    "value": "ق"
+  },
+  {
+    "name": "command_point",
+    "value": "نقطة"
+  },
+  {
+    "name": "command_point",
+    "value": "ن"
+  },
+  {
+    "name": "command_summary",
+    "value": "ملخص"
+  },
+  {
+    "name": "command_levels",
+    "value": "مستوى"
+  },
+  {
+    "name": "command_prices",
+    "value": "اسعار"
+  },
+  {
+    "name": "command_prices",
+    "value": "ا"
+  },
+  {
+    "name": "command_offer",
+    "value": "عروض"
+  },
+  {
+    "name": "command_offer",
+    "value": "ع"
+  },
+  {
+    "name": "message_default",
+    "value": "- مرحبًا بك في بوت حساب التشارمز\r\n\r\nالبوت متخصص في حساب كمية و قيمة التشارمز، لعرض قائمة المساعدة أكتب  !تشارمز مساعدة"
+  },
+  {
+    "name": "message_help",
+    "value": [
+      "- مرحبًا بك في بوت حساب التشارمز\r\n",
+      "!تشارمز قيمة <عدد التشارمز> - لعرض قيمة التشارمز بالنقاط",
+      "!تشارمز نقطة <عدد النقاط> - لعرض كمية التشارمز التي يمكنك شراءها",
+      "!تشارمز ملخص - لعرض إحصائيات الغرفة خلال 24 ساعة الماضية",
+      "!تشارمز اسعار - لعرض جميع أسعار",
+      "!تشارمز مستوى - لعرض التشارمز حسب المستوى",
+      "!تشارمز عروض - لمعرفة عروض التشارمز الحالية",
+      "!تشارمز عروض <رقم> - لمعرفة تفاصيل عرض محدد",
+      "!تشارمز مساعدة - لعرض قائمة المساعدة"
+    ]
+  },
+  {
+    "name": "message_error_not_number",
+    "value": "(n) المدخل لا بد أن يكون رقماً."
+  },
+  {
+    "name": "message_error_offer_notfound",
+    "value": "(n) لا يوجد عرض بهذ الرقم."
+  },
+  {
+    "name": "message_error_number_must_be_multiples_25",
+    "value": "(n) الرقم لابد ان يكون من مضاعفات 25."
+  },
+  {
+    "name": "message_error_summary_not_found",
+    "value": "- لا يوجد أحد."
+  },
+  {
+    "name": "message_summary",
+    "value": "احصائيات الغرفة خلال 24 ساعة:\r\n\r\n• الأكثر كرماً:\r\n{topSend}\r\n\r\n• الأكثر شهرة:\r\n{topReceived}\r\n\r\nالمجموع: {total} نقطة"
+  },
+  {
+    "name": "message_point",
+    "value": "/me الكمية: {charms} تشارم"
+  },
+  {
+    "name": "message_charms",
+    "value": "/me القيمة: {points} نقطة"
+  }
+]
