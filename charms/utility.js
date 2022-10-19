@@ -7,6 +7,13 @@ const { Constants } = require("wolf.js");
  */
 const formatSection = (sections, max) => {
   const filteredSections = sections.sectionList.filter((section) => {
+    if (section.validity?.endTime) {
+      const now = new Date();
+      const end = new Date(section.validity.endTime);
+      if (now > end) {
+        return false;
+      }
+    }
     return section.elementList.find((e) => e.type === "heading");
   });
   const newSections = filteredSections.slice(1, max).map((section) => {

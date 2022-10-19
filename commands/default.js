@@ -1,6 +1,5 @@
 const { Command } = require("wolf.js");
 const { api } = require("../bot");
-
 const COMMAND_TRIGGER = "command_default";
 
 Default = async (api, command) => {
