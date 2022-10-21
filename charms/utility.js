@@ -16,7 +16,7 @@ const formatSection = (sections, max) => {
     }
     return section.elementList.find((e) => e.type === "heading");
   });
-  const newSections = filteredSections.slice(1, max).map((section) => {
+  const newSections = filteredSections.slice(0, max).map((section) => {
     const formattedElements = formatElements(section.elementList);
     let elements = formattedElements.map((element) => {
       if (element.type === "collection") {

@@ -26,7 +26,7 @@ const get = async (index, languageId, max = 8) => {
   }
   const offer = offers[index - 1];
   if (offer.link.length <= 0) {
-    const charms = await recipeToCharms(offer.collection, languageId, max);
+    const charms = await recipeToCharms(offer.collection, languageId, 10);
     const { text, options } = offerWithCharmsLinks(charms, offer);
     return { text, options };
   } else {
