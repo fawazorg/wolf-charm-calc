@@ -1,62 +1,57 @@
-const { api } = require("../bot");
-const { formatSection, formatCharms } = require("./utility");
+import { client } from "../index.js";
+import { formatCharms, formatSection } from "./utility.js";
 /**
- * get all charms sections form store by language id
- * @param {Number} languageId
- * @returns {Array}
+ * Fetches all charm sections from the store by language.
+ * @param {number} languageId - The language identifier.
+ * @param {number} max - Maximum number of sections to return.
+ * @returns {Promise<Array>} Formatted sections list.
  */
 const sections = async (languageId, max) => {
-  const sectionsResults = await api.websocket.emit("topic page layout", {
-    name: "storecharmsmain",
-    languageId: languageId,
-  });
-  return formatSection(sectionsResults.body, max);
+  const sectionsResults = await client.topic.getTopicPageLayout("storecharmsmain", languageId);
+  return formatSection(sectionsResults, max);
 };
 /**
- * get recipe form store by id
- * @param {Number} id
- * @param {Number} languageId
- * @param {Number} max
- * @returns {Array}
+ * Fetches a recipe product list from the store by ID.
+ * @param {number} id - The recipe identifier.
+ * @param {number} languageId - The language identifier.
+ * @param {number} max - Maximum number of results.
+ * @returns {Promise<Array<number>>} List of product IDs.
  */
 const recipe = async (id, languageId, max) => {
-  const recipeResults = await api.websocket.emit("topic page recipe list", {
-    id: id,
-    type: "product",
-    languageId: languageId,
-    offset: 0,
-    maxResults: max,
-  });
-  return recipeResults.body.map((r) => {
+  const recipeResults = await client.topic.getTopicPageRecipeList(
+    id,
+    languageId,
+    max,
+    0,
+    "product",
+  );
+
+  return recipeResults.map((r) => {
     return r.id;
   });
 };
 /**
- * get products form store by there ids
- * @param {[Number]} productsId
- * @returns {Array}
+ * Fetches products from the store and extracts charm IDs.
+ * @param {number[]} productsId - Array of product IDs.
+ * @returns {Promise<Array<number>>} List of charm IDs.
  */
 const products = async (productsId) => {
-  const productsResults = await api.websocket.emit("store product", {
-    idList: productsId,
-  });
-  return productsResults.body.map((product) => product.body.charmId);
+  const productsResults = await client.store.getProductsByIds(productsId);
+
+  return productsResults.map((product) => product.body.charmId);
 };
 /**
- * convert recipe to charms array
- * @param {Number} id
- * @param {Number} languageId
- * @param {Number} max
- * @returns {Array}
+ * Converts a recipe into a formatted charms array.
+ * @param {number} id - The recipe identifier.
+ * @param {number} languageId - The language identifier.
+ * @param {number} max - Maximum number of recipe items.
+ * @returns {Promise<Array<{id: number, image: string, text: string}>>} Formatted charms.
  */
 const recipeToCharms = async (id, languageId, max) => {
   const recipeResults = await recipe(id, languageId, max);
   const productsResults = await products(recipeResults);
-  const charmsResults = await api.charm().getByIds(productsResults, languageId);
+  const charmsResults = await client.charm().getByIds(productsResults, languageId);
   return formatCharms(charmsResults, languageId);
 };
 
-module.exports = {
-  sections,
-  recipeToCharms,
-};
+export { recipeToCharms, sections };

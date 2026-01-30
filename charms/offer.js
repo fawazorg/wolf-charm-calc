@@ -1,23 +1,22 @@
-const { sections, recipeToCharms } = require("./store");
-const {
-  formatOffers,
-  offerWithCharmsLinks,
-  offerWithLink,
-} = require("./utility");
+import { sections, recipeToCharms } from "./store.js";
+import { formatOffers, offerWithCharmsLinks, offerWithLink } from "./utility.js";
 /**
- *
- * @param {*} languageId
- * @param {*} max
+ * Retrieves all offers for a given language.
+ * @param {number} languageId - The language identifier.
+ * @param {number} max - Maximum number of offers to return.
+ * @returns {Promise<string>} Formatted offers text.
  */
 const all = async (languageId, max = 8) => {
   const offers = await sections(languageId, max);
   return formatOffers(offers);
 };
 /**
- *
- * @param {*} index
- * @param {*} languageId
- * @returns
+ * Retrieves a specific offer by index with charm or link data.
+ * @param {number} index - The 1-based offer index.
+ * @param {number} languageId - The language identifier.
+ * @param {number} max - Maximum number of sections to fetch.
+ * @returns {Promise<{text: string, options: object}>} The offer text and display options.
+ * @throws {Error} If the index exceeds available offers.
  */
 const get = async (index, languageId, max = 8) => {
   const offers = await sections(languageId, max);
@@ -35,4 +34,4 @@ const get = async (index, languageId, max = 8) => {
   }
 };
 
-module.exports = { all, get };
+export { all, get };

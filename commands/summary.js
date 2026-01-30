@@ -1,14 +1,11 @@
-const { Command } = require("wolf.js");
-const { api } = require("../bot");
-const { getSummary } = require("../charms/tip");
+import { getSummary } from "../charms/tip.js";
+/**
+ * Summary command handler
+ * @param {import('wolf.js').CommandContext} command - The incoming command context.
+ * @returns {Promise<void>}
+ */
+export default async (command) => {
+  const text = await getSummary(command.targetChannelId, command.language);
 
-const COMMAND_TRIGGER = "command_summary";
-
-Summary = async (api, command) => {
-  const text = await getSummary(command.targetGroupId, command.language);
-  return api.messaging().sendGroupMessage(command.targetGroupId, text);
+  return command.reply(text);
 };
-
-module.exports = new Command(COMMAND_TRIGGER, {
-  group: (command) => Summary(api, command),
-});

@@ -1,102 +1,107 @@
-const { api } = require("../bot");
-const { Constants } = require("wolf.js");
+import { TipDirection, TipPeriod, TipType } from "wolf.js";
+import { client } from "../index.js";
+
 /**
- *
- * @param {*} groupID
- * @param {*} language
- * @returns
+ * Fetches the top 3 senders for a channel today.
+ * @param {number} channleId - The channel identifier.
+ * @param {number} language - The language identifier.
+ * @returns {Promise<string>} Formatted leaderboard of top senders.
  */
-const topSender = async (groupID, language) => {
-  const top = await api
-    .tipping()
-    .getGroupLeaderboard(
-      groupID,
-      Constants.TipPeriod.DAY,
-      Constants.TipType.SUBSCRIBER,
-      Constants.TipDirection.SENT
-    );
-  return formatUsers(top.body.leaderboard.slice(0, 3), language);
+const topSender = async (channleId, language) => {
+  const top = await client.tipping.getChannelLeaderboard(
+    channleId,
+    TipPeriod.DAY,
+    TipType.SUBSCRIBER,
+    TipDirection.SENT,
+  );
+  return formatUsers(top.leaderboard.slice(0, 3), language);
 };
+
 /**
- *
- * @param {*} groupID
- * @param {*} language
- * @returns
+ * Fetches the top 3 receivers for a channel today.
+ * @param {number} channleId - The channel identifier.
+ * @param {number} language - The language identifier.
+ * @returns {Promise<string>} Formatted leaderboard of top receivers.
  */
-const topReceived = async (groupID, language) => {
-  const top = await api
-    .tipping()
-    .getGroupLeaderboard(
-      groupID,
-      Constants.TipPeriod.DAY,
-      Constants.TipType.SUBSCRIBER,
-      Constants.TipDirection.RECEIVED
-    );
-  return formatUsers(top.body.leaderboard.slice(0, 3), language);
+const topReceived = async (channleId, language) => {
+  const top = await client.tipping.getChannelLeaderboard(
+    channleId,
+    TipPeriod.DAY,
+    TipType.SUBSCRIBER,
+    TipDirection.RECEIVED,
+  );
+  return formatUsers(top.leaderboard.slice(0, 3), language);
 };
+
 /**
- *
- * @param {*} groupID
- * @returns
+ * Fetches the total points spent in a channel today.
+ * @param {number} channleId - The channel identifier.
+ * @returns {Promise<string>} Formatted total points or "0".
  */
-const totalPoint = async (groupID) => {
-  const total = await api
-    .tipping()
-    .getGroupLeaderboardSummary(
-      groupID,
-      Constants.TipPeriod.DAY,
-      Constants.TipType.SUBSCRIBER,
-      Constants.TipDirection.RECEIVED
-    );
-  return formatNumber(total.body.totalSpend) || "0";
+const totalPoint = async (channleId) => {
+  // TODO: open an issue in wolf.js to fix getChannelLeaderboardSummary
+  /* const total = await client
+    .tipping
+    .getChannelLeaderboardSummary(
+      channleId,
+      TipPeriod.DAY,
+      TipType.SUBSCRIBER,
+      TipDirection.RECEIVED
+    ); */
+
+  const total = await client.websocket.emit("tip leaderboard group summary", {
+    id: channleId,
+    period: TipPeriod.DAY,
+    type: TipType.SUBSCRIBER,
+    tipDirection: TipDirection.RECEIVED,
+  });
+
+  return formatNumber(total.body?.totalSpend) || "0";
 };
+
 /**
- *
- * @param {*} number
- * @returns
+ * Formats a number with comma separators.
+ * @param {number} n - The number to format.
+ * @returns {string} The comma-formatted number string.
  */
-const formatNumber = (number) => {
-  return api.utility().number().addCommas(number);
+const formatNumber = (n) => {
+  return client.utility.number.addCommas(n);
 };
+
 /**
- *
- * @param {*} arr
- * @param {*} language
- * @returns
+ * Formats leaderboard users into a readable string.
+ * @param {Array} arr - The leaderboard entries.
+ * @param {number} language - The language identifier.
+ * @returns {Promise<string>} Formatted user list separated by newlines.
  */
 const formatUsers = async (arr = [], language) => {
   const comma = language === "ar" ? "ـ" : "-";
   if (arr.length <= 0)
-    return api
-      .phrase()
-      .getByLanguageAndName(language, "message_error_summary_not_found");
-  const users = await api
-    .subscriber()
-    .getByIds(arr.map((e) => e.subscriber.id));
+    return client.phrase.getByLanguageAndName(language, "message_error_summary_not_found");
+  const users = await client.subscriber.getByIds(arr.map((e) => e.subscriber.id));
   const results = arr.map((user) => {
     let { nickname, id } = users.find((u) => u.id === user.subscriber.id);
-    return `${
-      user.rank
-    } ${comma}  ${nickname} ( ${id} ) ${comma} ${formatNumber(user.credits)}`;
+    return `${user.rank} ${comma}  ${nickname} ( ${id} ) ${comma} ${formatNumber(user.credits)}`;
   });
   return results.join("\n");
 };
+
 /**
- *
- * @param {*} groupID
- * @param {*} language
- * @returns
+ * Generates a full tipping summary for a channel.
+ * @param {number} channleId - The channel identifier.
+ * @param {number} language - The language identifier.
+ * @returns {Promise<string>} The formatted summary with top senders, receivers, and total.
  */
-const getSummary = async (groupID, language) => {
-  const topSenderList = await topSender(groupID, language);
-  const topReceivedList = await topReceived(groupID, language);
-  const total = await totalPoint(groupID);
-  const phrase = api.phrase().getByLanguageAndName(language, "message_summary");
-  return api.utility().string().replace(phrase, {
+const getSummary = async (channleId, language) => {
+  const topSenderList = await topSender(channleId, language);
+  const topReceivedList = await topReceived(channleId, language);
+  const total = await totalPoint(channleId);
+  const phrase = client.phrase.getByLanguageAndName(language, "message_summary");
+  return client.utility.string.replace(phrase, {
     topSend: topSenderList,
     topReceived: topReceivedList,
     total,
   });
 };
 
-module.exports = { getSummary };
+export { getSummary };

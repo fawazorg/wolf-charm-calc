@@ -4,32 +4,16 @@
     "value": "!تشارمز"
   },
   {
-    "name": "command_default",
-    "value": "!تشارم"
-  },
-  {
     "name": "command_help",
     "value": "مساعدة"
-  },
-  {
-    "name": "command_help",
-    "value": "مساعده"
   },
   {
     "name": "command_price",
     "value": "قيمة"
   },
   {
-    "name": "command_price",
-    "value": "ق"
-  },
-  {
     "name": "command_point",
     "value": "نقطة"
-  },
-  {
-    "name": "command_point",
-    "value": "ن"
   },
   {
     "name": "command_summary",
@@ -44,16 +28,8 @@
     "value": "اسعار"
   },
   {
-    "name": "command_prices",
-    "value": "ا"
-  },
-  {
     "name": "command_offer",
     "value": "عروض"
-  },
-  {
-    "name": "command_offer",
-    "value": "ع"
   },
   {
     "name": "message_default",

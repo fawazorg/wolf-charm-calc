@@ -1,14 +1,10 @@
-const Default = require("./default");
-const Help = require("./help");
-const Levels = require("./levels");
-const Offer = require("./offer");
-const Point = require("./point");
-const Price = require("./price");
-const Prices = require("./prices");
-const Summary = require("./summary");
+import help from "./help.js";
+import levels from "./levels.js";
+import main from "./main.js";
+import offer from "./offer.js";
+import point from "./point.js";
+import price from "./price.js";
+import prices from "./prices.js";
+import summary from "./summary.js";
 
-const Commands = [Help, Levels, Offer, Point, Price, Prices, Summary];
-
-Default.children = Commands;
-
-module.exports = Default;
+export { help, levels, main, offer, point, price, prices, summary };
