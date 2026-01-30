@@ -1,21 +1,17 @@
-const { Command } = require("wolf.js");
-const { api } = require("../bot");
-const { isNumber } = require("../charms/validate");
-const COMMAND_TRIGGER = "command_price";
-
-Price = async (api, command) => {
+import { isNumber } from "../charms/validate.js";
+/**
+ * Price command handler
+ * @param {import('wolf.js').WOLF} client - The WOLF client instance.
+ * @param {import('wolf.js').CommandContext} command - The incoming command context.
+ * @returns {Promise<void>}
+ */
+export default async (client, command) => {
   const charms = isNumber(command.argument, true);
   if (!charms) {
-    const phrase = api
-      .phrase()
-      .getByCommandAndName(command, "message_error_not_number");
-    return await api.messaging().sendMessage(command, phrase);
+    return command.reply(command.getPhrase("message_error_not_number"));
   }
-  const phrase = api.phrase().getByCommandAndName(command, "message_charms");
-  const text = api.utility().string().replace(phrase, { points: charms });
-  return await api.messaging().sendMessage(command, text);
-};
 
-module.exports = new Command(COMMAND_TRIGGER, {
-  both: (command) => Price(api, command),
-});
+  return command.reply(
+    client.utility.string.replace(command.getPhrase("message_charms"), { points: charms }),
+  );
+};

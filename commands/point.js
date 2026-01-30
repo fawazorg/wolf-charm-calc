@@ -1,25 +1,17 @@
-const { Command } = require("wolf.js");
-const { api } = require("../bot");
-const { is25Multiples } = require("../charms/validate");
-
-const COMMAND_TRIGGER = "command_point";
-
-Point = async (api, command) => {
+import { is25Multiples } from "../charms/validate.js";
+/**
+ * Point command handler
+ * @param {import('wolf.js').WOLF} client - The WOLF client instance.
+ * @param {import('wolf.js').CommandContext} command - The incoming command context.
+ * @returns {Promise<void>}
+ */
+export default async (client, command) => {
   const points = is25Multiples(command.argument);
   if (!points) {
-    const phrase = api
-      .phrase()
-      .getByCommandAndName(
-        command,
-        "message_error_number_must_be_multiples_25"
-      );
-    return await api.messaging().sendMessage(command, phrase);
+    return command.reply(command.getPhrase("message_error_number_must_be_multiples_25"));
   }
-  const phrase = api.phrase().getByCommandAndName(command, "message_point");
-  const text = api.utility().string().replace(phrase, { charms: points });
-  return await api.messaging().sendMessage(command, text);
-};
 
-module.exports = new Command(COMMAND_TRIGGER, {
-  both: (command) => Point(api, command),
-});
+  return command.reply(
+    client.utility.string.replace(command.getPhrase("message_point"), { charms: points }),
+  );
+};

@@ -1,17 +1,13 @@
-const { Command } = require("wolf.js");
-const { api } = require("../bot");
-const fs = require("fs");
-const path = require("path");
+import { readFile } from "fs/promises";
 
-const COMMAND_TRIGGER = "command_levels";
+const imagePath = new URL("../charms/data/levels.jpeg", import.meta.url);
 
-Levels = async (api, command) => {
-  let image = await fs.readFileSync(
-    path.join(__dirname, "../charms/data/levels.jpeg")
-  );
-  return await api.messaging().sendMessage(command, image);
+/**
+ * Levels command - sends the levels image
+ * @param {import('wolf.js').CommandContext} command - The incoming command context.
+ * @returns {Promise<void>}
+ */
+export default async (command) => {
+  const image = await readFile(imagePath);
+  return command.reply(image);
 };
-
-module.exports = new Command(COMMAND_TRIGGER, {
-  both: (command) => Levels(api, command),
-});

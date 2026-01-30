@@ -1,34 +1,24 @@
-const { Command } = require("wolf.js");
-const { api } = require("../bot");
-const { all, get } = require("../charms/offer");
-const { isNumber } = require("../charms/validate");
-
-const COMMAND_TRIGGER = "command_offer";
-
-Offer = async (api, command) => {
+import { all, get } from "../charms/offer.js";
+import { isNumber } from "../charms/validate.js";
+/**
+ * Offers command handler
+ * @param {import('wolf.js').CommandContext} command - The incoming command context.
+ * @returns {Promise<void>}
+ */
+export default async (command) => {
   const language = command.language === "ar" ? 14 : 1;
   if (command.argument.length < 1) {
     const offers = await all(language, 6);
-    return await api.messaging().sendMessage(command, offers);
+    return await command.reply(offers);
   }
   const index = isNumber(command.argument);
   if (!index) {
-    const phrase = api
-      .phrase()
-      .getByCommandAndName(command, "message_error_not_number");
-    return await api.messaging().sendMessage(command, phrase);
+    return await command.reply(command.getPhrase("message_error_not_number"));
   }
   try {
     let { text, options } = await get(index, language, 6);
-    await api.messaging().sendMessage(command, text, options);
-  } catch (error) {
-    const phrase = api
-      .phrase()
-      .getByCommandAndName(command, "message_error_offer_notfound");
-    return await api.messaging().sendMessage(command, phrase);
+    await command.reply(text, options);
+  } catch {
+    return await command.reply(command.getPhrase("message_error_offer_notfound"));
   }
 };
-
-module.exports = new Command(COMMAND_TRIGGER, {
-  both: (command) => Offer(api, command),
-});

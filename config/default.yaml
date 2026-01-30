@@ -1,10 +1,21 @@
-keyword: charms
-app:
-  defaultLanguage: ar
-  developerId: 12500068
-  commandSettings:
-    ignoreOfficialBots: true
-    ignoreUnofficialBots: true
-  networkSettings:
-    retryMode: 1
-    retryAttempts: 1
+keyword: charms # keyword #single word only
+framework:
+  developer: 12500068 #your id here
+  owner: 7766 #owner id here
+  language: ar #default response language here
+  command:
+    ignore:
+      official: true # whether or not an official bot will trigger a command (internal)
+      unofficial: true # whether or not an unofficial bot will trigger a command (internal)
+      self: true # whether or not the bot will process its own messages and trigger its own commands (internal)
+  message:
+    ignore:
+      self: true # whether or not the bot will process its own messages (internal)
+  subscriptions:
+    messages:
+      channel:
+        enabled: true #subscribe to channel messages  (server)
+        tipping: true # subscribe to channel message tip events  (server)
+      private:
+        enabled: true # subscribe to private messages (server)
+        tipping: false # subscribe to private message tip events  (server) - NOT IMPLEMENTED

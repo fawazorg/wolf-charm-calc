@@ -1,12 +1,11 @@
-const { Constants } = require("wolf.js");
 /**
- *
- * @param {Array} sections
- * @param {Number} max
- * @returns {Array}
+ * Filters and formats store sections, removing expired ones.
+ * @param {object} sections - The raw topic page layout response.
+ * @param {number} max - Maximum number of sections to return.
+ * @returns {Array<object>} Formatted section objects with heading, collection, and metadata.
  */
 const formatSection = (sections, max) => {
-  const filteredSections = sections.sectionList.filter((section) => {
+  const filteredSections = sections.body.sectionList.filter((section) => {
     if (section.validity?.endTime) {
       const now = new Date();
       const end = new Date(section.validity.endTime);
@@ -42,44 +41,44 @@ const formatSection = (sections, max) => {
 
   return newSections;
 };
+
 /**
- *
- * @param {Array} elements
- * @returns {Array}
+ * Deduplicates elements by type, merging text properties.
+ * @param {Array<object>} elements - The raw element list from a section.
+ * @returns {Array<object>} Deduplicated elements.
  */
 const formatElements = (elements) => {
   let arr = elements.reduce((p, c) => {
     const index = p.findIndex((i) => i.type === c.type);
     if (index > 0) {
-      p[
-        index
-      ].properties.text = `\r\n${p[index].properties.text}${c.properties.text}`;
+      p[index].properties.text = `\r\n${p[index].properties.text}${c.properties.text}`;
       return [...p];
     }
     return [...p, c];
   }, []);
   return arr;
 };
+
 /**
- *
- * @param {Array} charms
- * @param {Number} languageId
- * @returns {Array}
+ * Maps charm objects to a simplified format with localized names.
+ * @param {Array<object>} charms - The charm objects from the API.
+ * @param {number} languageId - The language identifier for name lookup.
+ * @returns {Array<{id: number, image: string, text: string}>} Formatted charm entries.
  */
 const formatCharms = (charms = [], languageId) => {
   return charms.map((charm) => {
     return {
       id: charm.id,
       image: charm.imageUrl,
-      text: charm.nameTranslationList.find((x) => x.languageId === languageId)
-        .text,
+      text: charm.nameTranslationList.find((x) => x.languageId === languageId).text,
     };
   });
 };
+
 /**
- *
- * @param {Array} offers
- * @returns {String}
+ * Formats a list of offers into a numbered string.
+ * @param {Array<object>} offers - The offer objects with heading property.
+ * @returns {Promise<string>} Numbered list of offer headings.
  */
 const formatOffers = async (offers) => {
   let results = "";
@@ -92,20 +91,22 @@ const formatOffers = async (offers) => {
   });
   return results;
 };
+
 /**
- *
- * @param {Object} offer
- * @returns {String}
+ * Formats a single offer into a display string.
+ * @param {object} offer - The offer object with heading and optional text.
+ * @returns {string} Combined heading and text.
  */
 const formatOffer = (offer) => {
   return `${offer.heading}${offer.text || ""}`;
 };
+
 /**
- *
- * @param {Array} charms
- * @param {Number} padding
- * @param {String} text
- * @returns {Object}
+ * Builds link options for charm images within text.
+ * @param {Array<{text: string, image: string}>} charms - The charm entries.
+ * @param {number} padding - Character offset for link positioning.
+ * @param {string} text - The text containing charm names.
+ * @returns {object} Options object with links array.
  */
 const setupCharmsOptions = (charms, padding, text) => {
   let options = {};
@@ -116,17 +117,16 @@ const setupCharmsOptions = (charms, padding, text) => {
       start,
       end: start + charm.text.length,
       value: charm.image,
-      type: Constants.MessageLinkingType.EXTERNAL,
     });
   });
   return options;
 };
+
 /**
- *
- * @param {Array} charms
- * @param {Number} padding
- * @param {String} text
- * @returns {Object}
+ * Builds a single link option spanning the heading text.
+ * @param {number} length - The length of the heading text.
+ * @param {string} link - The URL to link to.
+ * @returns {object} The options object with link metadata.
  */
 const setupOfferLink = (length, link) => {
   let options = {};
@@ -135,15 +135,15 @@ const setupOfferLink = (length, link) => {
     start: 0,
     end: length,
     value: link,
-    type: Constants.MessageLinkingType.EXTERNAL,
   });
   return options;
 };
+
 /**
- *
- * @param {Array} charms
- * @param {Object} offer
- * @returns {Object}
+ * Combines an offer with charm image links.
+ * @param {Array<{text: string, image: string}>} charms - The charm entries.
+ * @param {object} offer - The offer object.
+ * @returns {{text: string, options: object}} Formatted text and link options.
  */
 const offerWithCharmsLinks = (charms, offer) => {
   const offerText = formatOffer(offer);
@@ -155,11 +155,11 @@ const offerWithCharmsLinks = (charms, offer) => {
     options,
   };
 };
+
 /**
- *
- * @param {Object} offer
- * @param {String} link
- * @returns {Object}
+ * Combines an offer with its heading link.
+ * @param {object} offer - The offer object containing heading, text, and link.
+ * @returns {{text: string, options: object}} The formatted text and link options.
  */
 const offerWithLink = (offer) => {
   const text = formatOffer(offer);
@@ -169,10 +169,11 @@ const offerWithLink = (offer) => {
     options,
   };
 };
+
 /**
- *
- * @param {Array} charms
- * @returns {String}
+ * Joins charm names into a pipe-separated string.
+ * @param {Array<{text: string}>} charms - The charm entries.
+ * @returns {string} Pipe-separated charm names.
  */
 const charmsToText = (charms) => {
   let results = "";
@@ -186,10 +187,4 @@ const charmsToText = (charms) => {
   return results;
 };
 
-module.exports = {
-  formatSection,
-  formatCharms,
-  formatOffers,
-  offerWithCharmsLinks,
-  offerWithLink,
-};
+export { formatCharms, formatOffers, formatSection, offerWithCharmsLinks, offerWithLink };
