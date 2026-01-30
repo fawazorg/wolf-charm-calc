@@ -11,18 +11,7 @@ import * as Charms from "./commands/index.js";
 /** @type {import('wolf.js').WOLF} */
 const client = new WOLF();
 
-/**
- * Registers the command tree with channel handlers.
- * @description Command hierarchy:
- * - **default** - Fallback handler for unrecognized commands.
- *   - **help** - Displays the help message.
- *   - **levels** - Sends the charm levels image.
- *   - **offer** - Lists available offers or shows a specific offer.
- *   - **point** - Converts points to charms (multiples of 25).
- *   - **price** - Converts charms to points.
- *   - **prices** - Sends the charms pricing image.
- *   - **summary** - Displays the daily tipping summary.
- */
+// Registers the command tree with channel handlers.
 client.commandHandler.register([
   new Command("command_default", { channel: (command) => Charms.main(command) }, [
     /** Displays the help message. */
@@ -52,4 +41,4 @@ client.on("loginSuccess", async (subscriber) => {
   console.log(`[*][${subscriber.nickname} (${subscriber.id})] is now online.`);
 });
 
-client.login(process.env.EMAIL, process.env.PASSWORD, undefined, OnlineState.ONLINE);
+client.login(process.env.EMAIL, process.env.PASSWORD, process.env.API_KEY, OnlineState.ONLINE);
