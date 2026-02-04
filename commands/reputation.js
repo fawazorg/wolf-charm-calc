@@ -11,7 +11,7 @@ export default async (client, command) => {
     return command.reply(command.getPhrase("message_error_reputation_invalid"));
   }
 
-  const result = number * 0.0257;
+  const result = number / 100 * 0.0257;
   return command.reply(
     client.utility.string.replace(command.getPhrase("message_reputation"), { result: result }),
   );
