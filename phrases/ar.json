@@ -100,6 +100,10 @@
     "value": "(n) الرقم يجب أن يكون 100 على الأقل ومن مضاعفات 100."
   },
   {
+    "name": "message_error_reputation_level_required",
+    "value": "(n) يجب أن يكون مستواك 18 أو أعلى لاستخدام هذا الأمر."
+  },
+  {
     "name": "message_error_percentage_invalid",
     "value": "(n) النسبة يجب ألا تتجاوز 500%."
   },

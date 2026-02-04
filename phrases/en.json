@@ -112,6 +112,10 @@
     "value": "(n) The number must be at least 100 and a multiple of 100."
   },
   {
+    "name": "message_error_reputation_level_required",
+    "value": "(n) You must be level 18 or above to use this command."
+  },
+  {
     "name": "message_error_percentage_invalid",
     "value": "(n) The percentage must not exceed 500%."
   },

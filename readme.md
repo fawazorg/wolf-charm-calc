@@ -4,15 +4,17 @@ A [wolf.live](https://wolf.live) bot for calculating charm prices, converting po
 
 ## Features
 
-| Command     | Description                                       |
-| ----------- | ------------------------------------------------- |
-| **help**    | Displays the help message.                        |
-| **levels**  | Sends the charm levels image.                     |
-| **offer**   | Lists available offers or shows a specific offer. |
-| **point**   | Converts points to charms (multiples of 25).      |
-| **price**   | Converts charms to points.                        |
-| **prices**  | Sends the charms pricing image.                   |
-| **summary** | Displays the daily tipping summary.               |
+| Command        | Description                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| **help**       | Displays the help message.                                       |
+| **levels**     | Sends the charm levels image.                                    |
+| **offer**      | Lists available offers or shows a specific offer.                |
+| **percentage** | Calculates a percentage of a number.                             |
+| **point**      | Converts points to charms (multiples of 25).                     |
+| **price**      | Converts charms to points.                                       |
+| **prices**     | Sends the charms pricing image.                                  |
+| **reputation** | Calculates reputation points (requires level 18+).               |
+| **summary**    | Displays the daily tipping summary.                              |
 
 ## Prerequisites
 
@@ -61,9 +63,11 @@ wolf-charm-calc/
 │   ├── help.js           # Help command
 │   ├── levels.js         # Levels image command
 │   ├── offer.js          # Offers command
+│   ├── percentage.js     # Percentage calculator
 │   ├── point.js          # Points to charms converter
 │   ├── price.js          # Charms to points converter
 │   ├── prices.js         # Prices image command
+│   ├── reputation.js     # Reputation calculator
 │   └── summary.js        # Tipping summary command
 ├── charms/
 │   ├── offer.js          # Offer fetching and formatting
