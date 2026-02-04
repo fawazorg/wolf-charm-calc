@@ -35,4 +35,41 @@ const is25Multiples = (n) => {
   return client.utility.number.addCommas(Math.floor(parseInt(newN) / 25));
 };
 
-export { is25Multiples, isNumber };
+/**
+ * Validates that a number is at least 100 and a multiple of 100.
+ * @param {string} n - The raw input string.
+ * @returns {number|false} Parsed number, or false if invalid.
+ */
+const is100Multiples = (n) => {
+  let newN = client.utility.number.toEnglishNumbers(n);
+  if (!Validator.isValidNumber(newN)) {
+    return false;
+  }
+  const num = parseInt(newN);
+  if (num < 100) {
+    return false;
+  }
+  if (num % 100 !== 0) {
+    return false;
+  }
+  return num;
+};
+
+/**
+ * Validates that a percentage is positive and does not exceed 500.
+ * @param {string} n - The raw input string.
+ * @returns {number|false} Parsed percentage, or false if invalid.
+ */
+const isValidPercentage = (n) => {
+  let newN = client.utility.number.toEnglishNumbers(n);
+  if (!Validator.isValidNumber(newN)) {
+    return false;
+  }
+  const num = parseFloat(newN);
+  if (num <= 0 || num > 500) {
+    return false;
+  }
+  return num;
+};
+
+export { is25Multiples, is100Multiples, isNumber, isValidPercentage };

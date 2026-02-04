@@ -26,6 +26,10 @@ client.commandHandler.register([
     new Command("command_price", { channel: (command) => Charms.price(client, command) }),
     /** Sends the charms pricing image. */
     new Command("command_prices", { channel: (command) => Charms.prices(command) }),
+    /** Calculates reputation based on input multiplied by 0.0257. */
+    new Command("command_reputation", { channel: (command) => Charms.reputation(client, command) }),
+    /** Calculates percentage of a number. */
+    new Command("command_percentage", { channel: (command) => Charms.percentage(client, command) }),
     /** Displays the daily tipping summary. */
     new Command("command_summary", { channel: (command) => Charms.summary(command) }),
   ]),
