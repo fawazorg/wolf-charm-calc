@@ -44,6 +44,14 @@
     "value": "o"
   },
   {
+    "name": "command_reputation",
+    "value": "reputation"
+  },
+  {
+    "name": "command_percentage",
+    "value": "percentage"
+  },
+  {
     "name": "message_default",
     "value": "- Welcome to Charms bot\r\n\r\nBot helps you to dealing with charms, Calculate how much it will cost you, Find out about the latest charms offers available."
   },
@@ -58,6 +66,8 @@
       "!charms levels - Send a picture containing charms by levels",
       "!charms offer - Show latest charms offers",
       "!charms offer <ID> - Show the details of offer by ID",
+      "!charms reputation <number> - Calculate reputation points",
+      "!charms percentage <percent> <number> - Calculate percentage of a number",
       "!charms help - view help menu"
     ]
   },
@@ -88,5 +98,25 @@
   {
     "name": "message_charms",
     "value": "/me Cost: {points} points"
+  },
+  {
+    "name": "message_reputation",
+    "value": "/me Reputation: {result}"
+  },
+  {
+    "name": "message_percentage",
+    "value": "/me Result: {result}"
+  },
+  {
+    "name": "message_error_reputation_invalid",
+    "value": "(n) The number must be at least 100 and a multiple of 100."
+  },
+  {
+    "name": "message_error_percentage_invalid",
+    "value": "(n) The percentage must not exceed 500%."
+  },
+  {
+    "name": "message_error_percentage_args",
+    "value": "(n) Usage: percentage <percent> <number>"
   }
 ]
