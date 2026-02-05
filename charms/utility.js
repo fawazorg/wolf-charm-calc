@@ -98,8 +98,12 @@ const formatOffers = async (offers) => {
  * @returns {string} Combined heading and text.
  */
 const formatOffer = (offer) => {
-  return `[${offer.heading.trim()}](${offer.link})\r\n${offer.text || ""}`;
+  const heading = offer.heading.trim();
+  // Only use Markdown link format if offer has a valid link
+  const title = offer.link?.length > 0 ? `[${heading}](${offer.link})` : heading;
+  return `${title}\r\n${offer.text || ""}`;
 };
+
 
 
 /**
