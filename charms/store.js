@@ -26,19 +26,20 @@ const recipe = async (id, languageId, max) => {
     "product",
   );
 
-  return recipeResults.map((r) => {
+  return recipeResults.body.map((r) => {
     return r.id;
   });
 };
 /**
  * Fetches products from the store and extracts charm IDs.
  * @param {number[]} productsId - Array of product IDs.
+ * @param {number} languageId - The language identifier.
  * @returns {Promise<Array<number>>} List of charm IDs.
  */
-const products = async (productsId) => {
-  const productsResults = await client.store.getProductsByIds(productsId);
+const products = async (productsId, languageId) => {
+  const productsResults = await client.store.getProducts(productsId, languageId);
 
-  return productsResults.map((product) => product.body.charmId);
+  return productsResults.map((product) => product.charmId);
 };
 /**
  * Converts a recipe into a formatted charms array.
@@ -48,9 +49,10 @@ const products = async (productsId) => {
  * @returns {Promise<Array<{id: number, image: string, text: string}>>} Formatted charms.
  */
 const recipeToCharms = async (id, languageId, max) => {
+
   const recipeResults = await recipe(id, languageId, max);
-  const productsResults = await products(recipeResults);
-  const charmsResults = await client.charm().getByIds(productsResults, languageId);
+  const productsResults = await products(recipeResults, languageId);
+  const charmsResults = await client.charm.getByIds(productsResults, languageId);
   return formatCharms(charmsResults, languageId);
 };
 

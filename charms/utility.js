@@ -70,7 +70,7 @@ const formatCharms = (charms = [], languageId) => {
     return {
       id: charm.id,
       image: charm.imageUrl,
-      text: charm.nameTranslationList.find((x) => x.languageId === languageId).text,
+      text: charm.name,
     };
   });
 };
@@ -98,76 +98,29 @@ const formatOffers = async (offers) => {
  * @returns {string} Combined heading and text.
  */
 const formatOffer = (offer) => {
-  return `${offer.heading}${offer.text || ""}`;
+  return `[${offer.heading.trim()}](${offer.link})\r\n${offer.text || ""}`;
 };
 
-/**
- * Builds link options for charm images within text.
- * @param {Array<{text: string, image: string}>} charms - The charm entries.
- * @param {number} padding - Character offset for link positioning.
- * @param {string} text - The text containing charm names.
- * @returns {object} Options object with links array.
- */
-const setupCharmsOptions = (charms, padding, text) => {
-  let options = {};
-  options.links = [];
-  charms.forEach((charm) => {
-    let start = padding + text.indexOf(charm.text);
-    options.links.push({
-      start,
-      end: start + charm.text.length,
-      value: charm.image,
-    });
-  });
-  return options;
-};
-
-/**
- * Builds a single link option spanning the heading text.
- * @param {number} length - The length of the heading text.
- * @param {string} link - The URL to link to.
- * @returns {object} The options object with link metadata.
- */
-const setupOfferLink = (length, link) => {
-  let options = {};
-  options.links = [];
-  options.links.push({
-    start: 0,
-    end: length,
-    value: link,
-  });
-  return options;
-};
 
 /**
  * Combines an offer with charm image links.
  * @param {Array<{text: string, image: string}>} charms - The charm entries.
  * @param {object} offer - The offer object.
- * @returns {{text: string, options: object}} Formatted text and link options.
+ * @returns {string} Formatted text and link options.
  */
 const offerWithCharmsLinks = (charms, offer) => {
   const offerText = formatOffer(offer);
   const charmsText = charmsToText(charms);
-  const text = offerText + "\r\n\r\n" + charmsText;
-  const options = setupCharmsOptions(charms, offerText.length + 4, charmsText);
-  return {
-    text,
-    options,
-  };
+  return `${offerText}\r\n${charmsText}`;
 };
 
 /**
  * Combines an offer with its heading link.
  * @param {object} offer - The offer object containing heading, text, and link.
- * @returns {{text: string, options: object}} The formatted text and link options.
+ * @returns {string} The formatted text and link options.
  */
 const offerWithLink = (offer) => {
-  const text = formatOffer(offer);
-  const options = setupOfferLink(offer.heading.length, offer.link);
-  return {
-    text,
-    options,
-  };
+  return formatOffer(offer);
 };
 
 /**
@@ -179,12 +132,13 @@ const charmsToText = (charms) => {
   let results = "";
   charms.forEach((charm, index, arr) => {
     if (index === arr.length - 1) {
-      results += `${charm.text} .`;
+      results += `[${charm.text}](${charm.image})`;
       return results;
     }
-    results += `${charm.text} | `;
+    results += `[${charm.text}](${charm.image}) | `;
   });
   return results;
 };
 
 export { formatCharms, formatOffers, formatSection, offerWithCharmsLinks, offerWithLink };
+
