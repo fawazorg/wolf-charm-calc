@@ -4,12 +4,24 @@
     "value": "!تشارمز"
   },
   {
+    "name": "command_default_alias",
+    "value": "!تشارم"
+  },
+  {
     "name": "command_help",
     "value": "مساعدة"
   },
   {
+    "name": "command_help_alias",
+    "value": "مساعده"
+  },
+  {
     "name": "command_price",
     "value": "قيمة"
+  },
+  {
+    "name": "command_price_alias",
+    "value": "ق"
   },
   {
     "name": "command_point",
@@ -20,7 +32,15 @@
     "value": "ملخص"
   },
   {
+    "name": "command_summary_alias",
+    "value": "م"
+  },
+  {
     "name": "command_levels",
+    "value": "مستوى"
+  },
+  {
+    "name": "command_levels_alias",
     "value": "مستوى"
   },
   {
@@ -28,16 +48,32 @@
     "value": "اسعار"
   },
   {
+    "name": "command_prices_alias",
+    "value": "ا"
+  },
+  {
     "name": "command_offer",
     "value": "عروض"
+  },
+  {
+    "name": "command_offer_alias",
+    "value": "ع"
   },
   {
     "name": "command_reputation",
     "value": "سمعة"
   },
   {
+    "name": "command_reputation_alias",
+    "value": "س"
+  },
+  {
     "name": "command_percentage",
     "value": "نسبة"
+  },
+  {
+    "name": "command_percentage_alias",
+    "value": "ن"
   },
   {
     "name": "message_default",
